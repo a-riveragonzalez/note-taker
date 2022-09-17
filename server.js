@@ -1,3 +1,5 @@
+// ********************* Reference Variables ***********************//
+
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -7,7 +9,7 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-// *********************IN EVERY SERVER IN THIS ORDER***********************//
+// ********************* IN EVERY SERVER IN THIS ORDER ***********************//
 // Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -40,27 +42,35 @@ app.post('/api/notes', (req, res) => {
     // this is the user's note
     const newNote = req.body;
 
-    console.log(createNote(newNote, db));
+    console.log(createNote(newNote));
 
-    // todo needs a res (in the form of a json)
+    res.json(createNote(newNote))
 });
 
 // function for creating a note. Having an array where it gets posts to 
 // body = body of the json that comes from the front end note input
 // dataBaseArray is the db json array 
 
-const createNote = (body, dbArray) => {
+const createNote = (body) => {
     const newNote = body;
-    // todo comment on what this means 
-    dbArray = [];
 
-    dbArray.push(newNote);
-    console.log(dbArray)
+    // Read, parse, update(push), stringify, save
+    fs.readFile("./db/db.json", "utf8", (error, storednotes) => {
+        if (error) {
+            console.error(error)
+        } else {
+            const storedNotes = JSON.parse(storednotes);
 
 
-    // todo fs something 
-    
+            storedNotes.push(newNote);
+
+            fs.writeFileSync("./db/db.json", JSON.stringify(storedNotes)), (err) => 
+            err ? console.log(err) : console.log("Note has been added")
+        }
+    })
+
     // todo return something 
+    return newNote
 }
 
 //************** App listening **************//
