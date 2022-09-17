@@ -17,6 +17,7 @@ app.use(express.static('public'));
 
 // -------------------------------------------------------------------------//
 
+// ****************** HTML Routes ********************//
 // GET Route for homepage
 app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '/public/index.html'))
@@ -26,6 +27,8 @@ app.get('/', (req, res) =>
 app.get('/notes', (req, res) =>
   res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
+
+// **************** API Routes *****************//
 
 // api notes gets the json from the body
 app.get('/api/notes', (req, res) =>
@@ -37,7 +40,9 @@ app.post('/api/notes', (req, res) => {
     // this is the user's note
     const newNote = req.body;
 
-    console.log(createNote(newNote, db))
+    console.log(createNote(newNote, db));
+
+    // todo needs a res (in the form of a json)
 });
 
 // function for creating a note. Having an array where it gets posts to 
@@ -46,16 +51,19 @@ app.post('/api/notes', (req, res) => {
 
 const createNote = (body, dbArray) => {
     const newNote = body;
+    // todo comment on what this means 
     dbArray = [];
 
     dbArray.push(newNote);
-    
-    // return JSON.stringify(dataBaseArray)
+    console.log(dbArray)
 
-    // console.log(`${body.title} and the number ${dataBaseArray}`)
-    return dbArray
+
+    // todo fs something 
+    
+    // todo return something 
 }
 
+//************** App listening **************//
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
 );
