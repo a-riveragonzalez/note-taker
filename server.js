@@ -53,7 +53,7 @@ const createNote = (body) => {
 
     // Read, parse, update(push), stringify, save 
     // read database and add new note to it 
-    fs.readFile(path.join(__dirname, "./db/db.json"), "utf8", (error, storednotes) => {
+    fs.readFile(path.join(__dirname, "/db/db.json"), "utf8", (error, storednotes) => {
         if (error) {
             console.error(error)
         } else {
@@ -68,7 +68,7 @@ const createNote = (body) => {
             });
 
             fs.writeFileSync(
-                path.join(__dirname, "./db/db.json"), 
+                path.join(__dirname, "/db/db.json"), 
                 JSON.stringify(storedNotes)), (err) => 
                     err ? console.log(err) : console.log("Note has been added")
         }
@@ -92,7 +92,7 @@ const deleteid = (id) => {
 
     // Read, parse, update(delete), stringify, save 
     // read database and delete note in it 
-    fs.readFile(path.join(__dirname, "./db/db.json"), "utf8", (error, storednotes) => {
+    fs.readFile(path.join(__dirname, "/db/db.json"), "utf8", (error, storednotes) => {
         if (error) {
             console.error(error)
         } else {
@@ -106,7 +106,7 @@ const deleteid = (id) => {
             }
 
             fs.writeFileSync(
-                path.join(__dirname, "./db/db.json"), 
+                path.join(__dirname, "/db/db.json"), 
                 JSON.stringify(storedNotes)), (err) => 
                     err ? console.log(err) : console.log("Note has been deleted")
         }
