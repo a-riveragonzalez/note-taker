@@ -41,8 +41,8 @@ app.get('/api/notes', (req, res) =>
 app.post('/api/notes', (req, res) => {
     // this is the user's note
     const newNote = req.body;
-
-    res.json(createNote(newNote))
+    createNote(newNote)
+    res.json(db)
 });
 
 // function for creating a note
@@ -78,7 +78,7 @@ app.delete('/api/notes/:id', (req, res) => {
     deleteid(req.params.id);
 
     // ? why does returing this true work?
-    res.json(true)
+    res.json(db)
 })
 
 const deleteid = (id) => {
