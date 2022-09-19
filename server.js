@@ -65,8 +65,10 @@ const createNote = (body) => {
                 note.id = uuidv4();
             });
 
-            fs.writeFileSync(path.join(__dirname, "./db/db.json"), JSON.stringify(storedNotes)), (err) => 
-            err ? console.log(err) : console.log("Note has been added")
+            fs.writeFileSync(
+                path.join(__dirname, "./db/db.json"), 
+                JSON.stringify(storedNotes)), (err) => 
+                    err ? console.log(err) : console.log("Note has been added")
         }
     })
 
@@ -77,7 +79,7 @@ const createNote = (body) => {
 app.delete('/api/notes/:id', (req, res) => {
     deleteid(req.params.id);
 
-    // ? why does returing this true work?
+    // ? why does returing this work?
     res.json(db)
 })
 
@@ -99,8 +101,10 @@ const deleteid = (id) => {
                 }
             }
 
-            fs.writeFileSync(path.join(__dirname, "./db/db.json"), JSON.stringify(storedNotes)), (err) => 
-            err ? console.log(err) : console.log("Note has been deleted")
+            fs.writeFileSync(
+                path.join(__dirname, "./db/db.json"), 
+                JSON.stringify(storedNotes)), (err) => 
+                    err ? console.log(err) : console.log("Note has been deleted")
         }
     })
 }
