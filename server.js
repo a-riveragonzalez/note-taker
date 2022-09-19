@@ -48,6 +48,8 @@ app.post('/api/notes', (req, res) => {
 // function for creating a note
 const createNote = (body) => {
     const newNote = body;
+    console.log(newNote)
+    // ? could i use db variable instead of reading it?
 
     // Read, parse, update(push), stringify, save 
     // read database and add new note to it 
@@ -86,7 +88,9 @@ app.delete('/api/notes/:id', (req, res) => {
 const deleteid = (id) => {
     console.log(id)
 
-    // Read, parse, update(push), stringify, save 
+    // ? could i use db variable instead of reading it?
+
+    // Read, parse, update(delete), stringify, save 
     // read database and delete note in it 
     fs.readFile(path.join(__dirname, "./db/db.json"), "utf8", (error, storednotes) => {
         if (error) {
