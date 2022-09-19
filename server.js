@@ -34,7 +34,15 @@ app.get('/notes', (req, res) =>
 
 // api notes gets the json from the body
 app.get('/api/notes', (req, res) =>
-    res.json(db)
+// read database and add new note to it 
+    fs.readFile("./db/db.json", "utf8", (error, notes) => {
+        if (error) {
+        console.error(error)
+        }
+    const storedNotes = JSON.parse(notes);
+    console.log(storedNotes);
+    res.json(storedNotes)
+    })
 );
 
 // takes the notes from json and adds the users input note to the origin json db
