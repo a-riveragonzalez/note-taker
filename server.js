@@ -69,8 +69,8 @@ const createNote = (body) => {
 
             fs.writeFile(
                 path.join(__dirname, "db/db.json"), 
-                JSON.stringify(storedNotes)), (err) => 
-                    err ? console.log(err) : console.log("Note has been added")
+                JSON.stringify(storedNotes), (err) => 
+                    err ? console.log(err) : console.log("Note has been added"))
         }
     })
 
@@ -107,8 +107,8 @@ const deleteid = (id) => {
 
             fs.writeFile(
                 path.join(__dirname, "db/db.json"), 
-                JSON.stringify(storedNotes)), (err) => 
-                    err ? console.log(err) : console.log("Note has been deleted")
+                JSON.stringify(storedNotes), (err) => 
+                    err ? console.log(err) : console.log("Note has been deleted"))
         }
     })
 }
