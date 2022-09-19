@@ -58,7 +58,7 @@ const createNote = (body) => {
             console.error(error)
         } else {
             const storedNotes = JSON.parse(storednotes);
-            // console.log(storedNotes);
+            console.log(storedNotes);
 
             storedNotes.push(newNote);
 
@@ -67,7 +67,7 @@ const createNote = (body) => {
                 note.id = uuidv4();
             });
 
-            fs.writeFileSync(
+            fs.writeFile(
                 path.join(__dirname, "db/db.json"), 
                 JSON.stringify(storedNotes)), (err) => 
                     err ? console.log(err) : console.log("Note has been added")
@@ -97,7 +97,7 @@ const deleteid = (id) => {
             console.error(error)
         } else {
             const storedNotes = JSON.parse(storednotes);
-            // console.log(storedNotes);
+            console.log(storedNotes);
 
             for (let i = 0; i<storedNotes.length; i++){
                 if (storedNotes[i].id == id){
@@ -105,7 +105,7 @@ const deleteid = (id) => {
                 }
             }
 
-            fs.writeFileSync(
+            fs.writeFile(
                 path.join(__dirname, "db/db.json"), 
                 JSON.stringify(storedNotes)), (err) => 
                     err ? console.log(err) : console.log("Note has been deleted")
@@ -114,7 +114,7 @@ const deleteid = (id) => {
 }
 
 // GET Route for homepage - to catch any other extensions
-app.get('/*', (req, res) =>
+app.get('*', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/index.html'))
 );
 
