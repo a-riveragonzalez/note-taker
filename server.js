@@ -34,13 +34,13 @@ app.get('/notes', (req, res) =>
 
 // api notes gets the json from the body
 app.get('/api/notes', (req, res) =>
-// read database and add new note to it 
+// read database and add new note to it (important that it readsfile each time to check on updates, this solves issues with deployed site)
     fs.readFile("./db/db.json", "utf8", (error, notes) => {
         if (error) {
         console.error(error)
         }
     const storedNotes = JSON.parse(notes);
-    console.log(storedNotes);
+    // console.log(storedNotes);
     res.json(storedNotes)
     })
 );
@@ -56,8 +56,7 @@ app.post('/api/notes', (req, res) => {
 // function for creating a note
 const createNote = (body) => {
     const newNote = body;
-    console.log(newNote)
-    // ? could i use db variable instead of reading it?
+    // console.log(newNote)
 
     // Read, parse, update(push), stringify, save 
     // read database and add new note to it 
@@ -66,7 +65,7 @@ const createNote = (body) => {
             console.error(error)
         } else {
             const storedNotes = JSON.parse(storednotes);
-            console.log(storedNotes);
+            // console.log(storedNotes);
 
             storedNotes.push(newNote);
 
@@ -89,14 +88,11 @@ const createNote = (body) => {
 app.delete('/api/notes/:id', (req, res) => {
     deleteid(req.params.id);
 
-    // ? why does returing this work?
     res.json(db)
 })
 
 const deleteid = (id) => {
-    console.log(id)
-
-    // ? could i use db variable instead of reading it?
+    // console.log(id)
 
     // Read, parse, update(delete), stringify, save 
     // read database and delete note in it 
@@ -105,7 +101,7 @@ const deleteid = (id) => {
             console.error(error)
         } else {
             const storedNotes = JSON.parse(storednotes);
-            console.log(storedNotes);
+            // console.log(storedNotes);
 
             for (let i = 0; i<storedNotes.length; i++){
                 if (storedNotes[i].id == id){
