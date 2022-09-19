@@ -42,7 +42,7 @@ app.post('/api/notes', (req, res) => {
     // this is the user's note
     const newNote = req.body;
     createNote(newNote)
-    res.json(db)
+    res.json(newNote)
 });
 
 // function for creating a note
@@ -65,7 +65,7 @@ const createNote = (body) => {
                 note.id = uuidv4();
             });
 
-            fs.writeFileSync("./db/db.json", JSON.stringify(storedNotes)), (err) => 
+            fs.writeFileSync(path.join(__dirname, "./db/db.json"), JSON.stringify(storedNotes)), (err) => 
             err ? console.log(err) : console.log("Note has been added")
         }
     })
@@ -99,7 +99,7 @@ const deleteid = (id) => {
                 }
             }
 
-            fs.writeFileSync("./db/db.json", JSON.stringify(storedNotes)), (err) => 
+            fs.writeFileSync(path.join(__dirname, "./db/db.json"), JSON.stringify(storedNotes)), (err) => 
             err ? console.log(err) : console.log("Note has been deleted")
         }
     })
