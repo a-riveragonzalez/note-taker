@@ -1,4 +1,4 @@
-// ********************* Reference Variables ***********************//
+// ********************* Reference Variables *********************//
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-// ********************* IN EVERY SERVER IN THIS ORDER ***********************//
+// ********************* IN EVERY SERVER - IN THIS ORDER *********************//
 // Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -50,6 +50,8 @@ app.post('/api/notes', (req, res) => {
     // this is the user's note
     const newNote = req.body;
     createNote(newNote)
+    
+    // ? responding with json newNote
     res.json(newNote)
 });
 
@@ -88,6 +90,7 @@ const createNote = (body) => {
 app.delete('/api/notes/:id', (req, res) => {
     deleteid(req.params.id);
 
+    // ? responding with json db
     res.json(db)
 })
 
